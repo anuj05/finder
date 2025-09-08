@@ -1,7 +1,7 @@
 # Step1: Build the React APP
 FROM node:22.19.0-alpine3.21 as build
 WORKDIR /app
-COPY package.json ./
+COPY package.json .
 RUN npm install
 COPY . .
 RUN npm run build
