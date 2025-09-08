@@ -7,7 +7,7 @@ name: CICD
 on:
   push:
     branches:
-      - main
+      - deploy-to-ec2
 
 # jobs to run as part of this workflow
 jobs:
@@ -24,17 +24,17 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
         #run: docker build -t finder:latest .
-        run: docker build -t anuj05/finder .
+        run: docker build -t theanuj05/finder .
       - name: Publish image to docker hub
-        run: docker push anuj05/finder:latest
+        run: docker push theanuj05/finder:latest
   
   deploy:
     needs: build
-    runs-on: ec2
+    runs-on: aws-ec2
     steps:
       - name: Pull image from docker hub 
-        run: docker pull anuj05/finder:latest
+        run: docker pull theanuj05/finder:latest
       - name: Delete older Container
         run: docker rm -f reactContainer
       - name: Run the docker container
-        run: docker run -d -p 3000:80 --name reactContainer anuj05/finder
+        run: docker run -d -p 3000:80 --name reactContainer theanuj05/finder
