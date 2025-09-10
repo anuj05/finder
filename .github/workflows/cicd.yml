@@ -3,7 +3,7 @@ name: CICD
 on:
   push:
     branches:
-      - main
+      - deploy-to-ec2
 # CICD Pipeline for React App
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
     runs-on: [self-hosted, linux]
     steps:
       - name: Pull image from docker hub 
-        run: docker pull theanuj05/findgit er:latest 
+        run: docker pull theanuj05/finder:latest 
       - name: Delete Old Container
         run: docker rm -f finderContainer 
       - name: Run docker container
