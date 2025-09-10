@@ -23,7 +23,7 @@ jobs:
     runs-on: [self-hosted, linux]
     steps:
       - name: Pull image from docker hub 
-        run: docker pull theanuj05/finder:latest 
+        run: docker pull theanuj05/findgit er:latest 
       - name: Delete Old Container
         run: docker rm -f finderContainer 
       - name: Run docker container
