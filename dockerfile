@@ -10,6 +10,7 @@ RUN npm run build
 FROM nginx:1.25.2-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
+# Copy the build output from the previous stage
 COPY --from=builder /app/build .
 EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
