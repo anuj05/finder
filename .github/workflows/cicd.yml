@@ -1,10 +1,10 @@
 name: CICD
-
+# Trigger the workflow on push to the deploy-to-ec2 branch
 on:
   push:
     branches:
       - deploy-to-ec2
-
+# CICD Pipeline for React App
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
         run: docker build -t theanuj05/finder .
       - name: Publish image to docker hub
         run: docker push theanuj05/finder:latest
-  
+  # Deploy to EC2
   deploy:
     needs: build
     runs-on: [self-hosted, linux]
