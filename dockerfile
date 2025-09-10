@@ -1,13 +1,13 @@
 # Step1: Build the React APP
 FROM node:alpine3.1 as builder
 WORKDIR /app
-COPY package.json ./
+COPY package.json .
 RUN npm install
 COPY . .
 RUN npm run build
 
 # Step2: Serve the React app with Nginx
-FROM nginx:1.23-alpine
+FROM nginx:1.25.2-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=builder /app/build .
